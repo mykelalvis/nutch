@@ -53,12 +53,12 @@ import org.apache.nutch.util.NutchConfiguration;
 import org.xml.sax.InputSource;
 
 // ROME imports
-import com.sun.syndication.feed.synd.SyndCategory;
-import com.sun.syndication.feed.synd.SyndContent;
-import com.sun.syndication.feed.synd.SyndEntry;
-import com.sun.syndication.feed.synd.SyndFeed;
-import com.sun.syndication.feed.synd.SyndPerson;
-import com.sun.syndication.io.SyndFeedInput;
+import com.rometools.rome.feed.synd.SyndCategory;
+import com.rometools.rome.feed.synd.SyndContent;
+import com.rometools.rome.feed.synd.SyndEntry;
+import com.rometools.rome.feed.synd.SyndFeed;
+import com.rometools.rome.feed.synd.SyndPerson;
+import com.rometools.rome.io.SyndFeedInput;
 
 /**
  * 
@@ -208,6 +208,7 @@ public class FeedParser implements Parser {
     byte[] bytes = new byte[(int) file.length()];
     DataInputStream in = new DataInputStream(new FileInputStream(file));
     in.readFully(bytes);
+    in.close();
     ParseResult parseResult = parser.getParse(new Content(url, url, bytes,
         "application/rss+xml", new Metadata(), conf));
     for (Entry<Text, Parse> entry : parseResult) {

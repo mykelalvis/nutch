@@ -164,7 +164,7 @@
 
 <property>
   <name>http.agent.version</name>
-  <value>Nutch-1.13-SNAPSHOT</value>
+  <value>Nutch-1.14-SNAPSHOT</value>
   <description>A version string to advertise in the User-Agent 
    header.</description>
 </property>
@@ -313,13 +313,25 @@
   <description>Value of the "Accept-Language" request header field.
   This allows selecting non-English language as default one to retrieve.
   It is a useful setting for search engines build for certain national group.
+  To send requests without "Accept-Language" header field, thi  property must
+  be configured to contain a space character because an empty property does
+  not overwrite the default.
   </description>
 </property>
 
 <property>
   <name>http.accept</name>
   <value>text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</value>
-  <description>Value of the "Accept" request header field.
+  <description>Value of the "Accept" request header field. A space character
+  as value will cause that no "Accept" header field is sent in the request.
+  </description>
+</property>
+
+<property>
+  <name>http.accept.charset</name>
+  <value>utf-8,iso-8859-1;q=0.7,*;q=0.7</value>
+  <description>Value of the "Accept-Charset" request header field. A space character
+  as value will cause that no "Accept-Charset" header field is sent in the request.
   </description>
 </property>
 
@@ -1894,6 +1906,167 @@ visit https://wiki.apache.org/nutch/SimilarityScoringFilter-->
   last operation.</description>
 </property>
 
+<property>
+  <name>rabbitmq.indexer.server.host</name>
+  <value>localhost</value>
+  <description>
+    Host on which the RabbitMQ server is running. Default "localhost".
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.indexer.server.port</name>
+  <value>5672</value>
+  <description>
+    Port on which the RabbitMQ server is listening. Default "5672".
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.indexer.server.virtualhost</name>
+  <value></value>
+  <description>
+    Virtual Host where the exchange is and the user has access. Default "/".
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.indexer.server.username</name>
+  <value>admin</value>
+  <description>
+    Username for RabbitMQ server. Default "admin"
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.indexer.server.password</name>
+  <value>admin</value>
+  <description>
+    Password for RabbitMQ server. Default "admin"
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.indexer.exchange.server</name>
+  <value></value>
+  <description>
+    Name for the exchange server to use. Default "nutch.exchange"
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.indexer.exchange.type</name>
+  <value></value>
+  <description>
+    Type of the exchange. Default "direct".
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.indexer.queue.durable</name>
+  <value></value>
+  <description>
+    Message durability into the queue. Default "true".
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.indexer.queue.name</name>
+  <value></value>
+  <description>
+    Name of the queue where the messages will be sent. Default "nutch.queue"
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.indexer.queue.routingkey</name>
+  <value></value>
+  <description>
+    The routingKey used by indexer to publish messages to specific queues.
+    If the exchange type is "fanout", then this property is ignored. Default is "nutch.key"
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.indexer.commit.size</name>
+  <value>250</value>
+  <description>
+    Amount of documents to send into each message. Default "250"
+  </description>
+</property>
+
+<!--elasticsearch rest properties-->
+<property>
+    <name>elastic.rest.host</name>
+    <value></value>
+    <description>The hostname to send documents to using Elasticsearch Jest. Both host
+        and port must be defined</description>
+</property>
+
+<property>
+    <name>elastic.rest.port</name>
+    <value></value>
+    <description>The port to connect to using Elasticsearch Jest.</description>
+</property>
+
+<property>
+    <name>elastic.rest.index</name>
+    <value>nutch</value>
+    <description>Default index to send documents to.</description>
+</property>
+
+<property>
+    <name>elastic.rest.type</name>
+    <value>doc</value>
+    <description>Default type to send documents to.</description>
+</property>
+
+<property>
+    <name>elastic.rest.max.bulk.docs</name>
+    <value>250</value>
+    <description>Maximum size of the bulk in number of documents.</description>
+</property>
+
+<property>
+    <name>elastic.rest.max.bulk.size</name>
+    <value>26214400</value>
+    <description>Maximum size of the bulk in bytes.</description>
+</property>
+
+<property>
+    <name>elastic.rest.https</name>
+    <value>false</value>
+    <description>
+        "true" to enable https, "false" to disable https
+        If you've disabled http access (by forcing https), be sure to
+        set this to true, otherwise you might get "connection reset by peer".
+    </description>
+</property>
+
+<property>
+    <name>elastic.rest.user</name>
+    <value></value>
+    <description>Username for auth credentials (only used when https is enabled)</description>
+</property>
+
+<property>
+    <name>elastic.rest.password</name>
+    <value></value>
+    <description>Password for auth credentials (only used when https is enabled)</description>
+</property>
+
+<property>
+    <name>elastic.rest.trustallhostnames</name>
+    <value>false</value>
+    <description>
+        "true" to trust elasticsearch server's certificate even if its listed domain name does not
+        match the domain they are hosted on
+        "false" to check if the elasticsearch server's certificate's listed domain is the same domain
+        that it is hosted on, and if it doesn't, then fail to index
+        (only used when https is enabled)
+    </description>
+</property>
+
 <!-- subcollection properties -->
 
 <property>
@@ -2280,6 +2453,7 @@ visit https://wiki.apache.org/nutch/SimilarityScoringFilter-->
     Currently there exists an implemtation for RabbitMQ producer. 
   </description>
 </property>
+
 <property>
   <name>publisher.order</name>
   <value></value>
@@ -2287,7 +2461,9 @@ visit https://wiki.apache.org/nutch/SimilarityScoringFilter-->
     The order in which the publisher queues would be loaded
   </description>
 </property>
+
 <!-- RabbitMQ properties -->
+
 <property>
   <name>rabbitmq.exchange.server</name>
   <value></value>
@@ -2295,6 +2471,7 @@ visit https://wiki.apache.org/nutch/SimilarityScoringFilter-->
     Name for the exchange server to use. Default - "fetcher_log"
   </description>
 </property>
+
 <property>
   <name>rabbitmq.exchange.type</name>
   <value></value>
@@ -2302,6 +2479,7 @@ visit https://wiki.apache.org/nutch/SimilarityScoringFilter-->
     There are a few exchange types available: direct, topic, headers and fanout. Default "fanout".
   </description>
 </property>
+
 <property>
   <name>rabbitmq.host</name>
   <value></value>
@@ -2309,13 +2487,62 @@ visit https://wiki.apache.org/nutch/SimilarityScoringFilter-->
     Host on which the RabbitMQ server is running. Default "localhost".
   </description>
 </property>
+
+<property>
+  <name>rabbitmq.port</name>
+  <value></value>
+  <description>
+    Port on which the RabbitMQ server is listening. Default "5672".
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.virtualhost</name>
+  <value></value>
+  <description>
+    Default 'null'
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.username</name>
+  <value></value>
+  <description>
+    Default 'null'
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.password</name>
+  <value></value>
+  <description>
+    Default 'null'
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.queue.name</name>
+  <value></value>
+  <description>
+    Default 'fanout.queue'
+  </description>
+</property>
+
+<property>
+  <name>rabbitmq.queue.durable</name>
+  <value></value>
+  <description>
+    Default 'true'
+  </description>
+</property>
+
 <property>
   <name>rabbitmq.queue.routingkey</name>
   <value></value>
   <description>
-    The routingKey used by publisher to publish messages to specific queues. If the exchange type is "fanout", then this property is ignored. 
+    Default is 'fanout.key'
+    The routingKey used by publisher to publish messages to specific queues. If the exchange type is "fanout", then this property is ignored.
   </description>
 </property>
-
 
 </configuration>
