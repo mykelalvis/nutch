@@ -21,3 +21,5 @@ nutch-plugins/*/target
 *.settings
 *.project
 *.classpath
+**.log
+.pmd
