@@ -28,11 +28,6 @@
     <artifactId>index-anchor</artifactId>
     <packaging>jar</packaging>
 
-    <name>index-anchor</name>
-    <url>http://nutch.apache.org</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <name>${project.artifactId}</name>
 
 </project>

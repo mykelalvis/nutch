@@ -16,30 +16,25 @@
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.apache.nutch</groupId>
-        <artifactId>nutch-plugins</artifactId>
-        <version>1.13-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
-    <artifactId>scoring-similarity</artifactId>
-    <packaging>jar</packaging>
+  <parent>
+    <groupId>org.apache.nutch</groupId>
+    <artifactId>nutch-plugins</artifactId>
+    <version>1.13-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>scoring-similarity</artifactId>
+  <packaging>jar</packaging>
 
-    <name>scoring-similarity</name>
-    <url>http://nutch.apache.org</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-analyzers-common</artifactId>
-            <version>5.5.0</version>
-        </dependency>
-    </dependencies>
+  <name>${project.artifactId}</name>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-analyzers-common</artifactId>
+      <version>5.5.0</version>
+    </dependency>
+  </dependencies>
 
 </project>

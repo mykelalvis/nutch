@@ -46,6 +46,8 @@
         <module>indexer-cloudsearch</module>
         <module>indexer-dummy</module>
         <module>indexer-elastic</module>
+        <module>indexer-elastic-rest</module>
+        <module>indexer-rabbit</module>
         <module>indexer-solr</module>
         <module>language-identifier</module>
         <module>lib-htmlunit</module>
